@@ -51,9 +51,7 @@ void Poll_PSX(byte Big_Motor_Value, boolean Small_Motor_Value)
 {
     byte Loop_Cnt;
     byte clr;
-    // Set the gamepad into pressure mode. Note that from this point on, we
-    // must sample the pad at least once every two seconds or it will leave
-    // pressure mode.
+
     digitalWrite(SLAVESELECT, LOW); // Select the pad.
 
     delayMicroseconds(10);
