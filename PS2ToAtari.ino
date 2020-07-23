@@ -139,13 +139,11 @@ void loop()
   uint8_t ps0 = PS_Data[0];
   uint8_t ps1 = PS_Data[1];
 
-  if((ps0 & 0x10)) { digitalWriteFast(7,HIGH); } else { digitalWriteFast(7,LOW); } //up
+  if(((ps0 & 0x10) | (ps1 & 0x10) )) { digitalWriteFast(4,HIGH); } else { digitalWriteFast(4,LOW); } //up or triangle -> up
   if((ps0 & 0x40)) { digitalWriteFast(6,HIGH); } else { digitalWriteFast(6,LOW); } //down
-  if((ps0 & 0x80)) { digitalWriteFast(5,HIGH); } else { digitalWriteFast(5,LOW); } //left
-  if((ps0 & 0x20)) { digitalWriteFast(4,HIGH); } else { digitalWriteFast(4,LOW); } //right
-  if((ps0 & 0x01)) { digitalWriteFast(3,HIGH); } else { digitalWriteFast(3,LOW); } //select
-  if((ps0 & 0x08)) { digitalWriteFast(3,HIGH); } else { digitalWriteFast(3,LOW); } //start
-  if((ps1 & 0x10)) { digitalWriteFast(7,HIGH); } else { digitalWriteFast(7,LOW); } //triangle 
+  if((ps0 & 0x80)) { digitalWriteFast(3,HIGH); } else { digitalWriteFast(3,LOW); } //left
+  if((ps0 & 0x20)) { digitalWriteFast(7,HIGH); } else { digitalWriteFast(7,LOW); } //right
+  if((ps0 & (0x01 | 0x08)) | (ps1 & 0x40) ) { digitalWriteFast(5,HIGH); } else { digitalWriteFast(5,LOW); } //select, start, X -> fire
   
   endDebugEvent(DEBUG_INTERRUPT_TIME);
 
